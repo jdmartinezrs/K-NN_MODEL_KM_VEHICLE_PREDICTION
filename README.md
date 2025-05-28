@@ -123,6 +123,7 @@ while True:
 ```
 #### 5.Realizar la predicción 
 
+
 ```python
     input_data = pd.DataFrame([{
         'Ult_Km': km_recorridos,
