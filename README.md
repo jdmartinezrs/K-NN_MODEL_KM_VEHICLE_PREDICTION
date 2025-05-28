@@ -40,8 +40,7 @@ import matplotlib.pyplot as plt
 ```
 
 
-
-#### 2.Definir columnas, variables , establecer el procesamiento con el modelo de  pipeline , realizar el entrenamiento 
+#### 2.Definir columnas y datos 
 
 ```python
 # Renombrar columnas
@@ -57,7 +56,12 @@ df.rename(columns={
 # Variables
 numeric_features = ['Ult_Km', 'Km_Plan', 'Km_Cambio', 'Dias_Pend', 'Progreso']
 categorical_features = ['Tipo_Vehiculo']
+```
 
+
+#### 3.establecer el procesamiento con el modelo de pipeline y realizar el entrenamiento
+
+```python
 # Preprocesamiento
 preprocessor = ColumnTransformer([
     ('num', StandardScaler(), numeric_features),
@@ -90,7 +94,7 @@ El preprocesador definido con `ColumnTransformer` aplica transformaciones distin
 
 Por otro lado, a las columnas categóricas listadas en `categorical_features`, se les aplica `OneHotEncoder()`. Esta transformación convierte cada valor categórico en una nueva columna binaria (0 o 1), representando la presencia o ausencia de cada categoría. Además, el argumento `handle_unknown='ignore'` permite que el modelo maneje de forma segura categorías nuevas que no fueron vistas durante el entrenamiento, evitando errores si en los datos de prueba aparecen valores desconocidos.
 
-#### 3.Interacción con el usuario y visualización  de resultados
+#### 4.Interacción con el usuario 
 
 ```python
 resultados = []
@@ -116,7 +120,10 @@ while True:
             break
         except ValueError:
             print("Ingresa un número válido.")
+```
+#### 5.Realizar la predicción 
 
+```python
     input_data = pd.DataFrame([{
         'Ult_Km': km_recorridos,
         'Km_Plan': df['Km_Plan'].mean(),
@@ -145,7 +152,11 @@ df_resultados = pd.DataFrame(resultados)
 
 print("\n--- RESUMEN DE PREDICCIONES ---")
 print(df_resultados)
+```
 
+#### 6.Gráfica de matplotlib
+
+```python
 # Gráfica
 plt.figure(figsize=(10, 6))
 for i, row in df_resultados.iterrows():
